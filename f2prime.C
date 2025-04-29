@@ -2,12 +2,6 @@
 #include "intro.h"	    // call UIC logo and initialization
 #include "ntrkoff.h"        // get Ntrk offline
 
-//ctes
-#define pimass 0.13957
-#define pro_mass 0.93827
-#define electronMass 0.000511
-
-
 std::map<unsigned long long, int> runLumiEvtToEntryMap;
 unsigned long long keyFromRunLumiEvent(UInt_t run, UInt_t lumi, ULong64_t event);
 
@@ -24,9 +18,12 @@ ntrkoff: multiplicity selection
 */
 void f2prime(TString input_file, TString input_V0file, TString ouputfile, int ntrkoff){
 
-    typedef ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiM4D<double>> LorentzVector;
+	typedef PtEtaPhiMVector LorentzVector;
 
-
+    const double pimass = 0.13957;
+    const double pro_mass = 0.93827;
+    const double electronMass = 0.000511;
+    
 	float ptmin = 0.3;
 	float etamin = 2.4;
 
@@ -617,7 +614,7 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 	int nEvents = MainV0Tree->GetEntries();
 	cout << "There are " << nEvents << " events" << endl;
  	int matchedevents = 0;	
-	for(int iEvent = 0; iEvent < nEvents; iEvent++) {
+	for(Long64_t iEvent = 0; iEvent < nEvents; iEvent++) {
 		
 		if( iEvent % 100000 == 0 )	std::cout << "iEvent: " << iEvent <<	" of " << nEvents << std::endl;
 
@@ -754,7 +751,8 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
   	 		for(int idx = 0; idx < totalsize; idx++){ // 2 loops in one
    		
     			int ik0s1 = idx / K0s_pt->size();
-    			int ik0s2 = idx % K0s_pt->size();   			
+    			int ik0s2 = idx % K0s_pt->size(); 
+    			if( ik0s2 <= ik0s1) continue; // j = i + 1			
 
 				// start doing K0s calculations
 				// K0s 1 	
@@ -883,6 +881,8 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 			    LorentzVector system = neutralkaon1 + neutralkaon2;
 				if( system.M() <= 1.2 ) continue;
     			if( system.M() >= 1.8 ) continue;
+    			if( system.Pt() <= 0.5 ) continue;
+    			if( fabs(system.Eta()) > 2.4 ) continue;    			
 				
 				// K0s1 part
 				K0s1_LooseVector->push_back(1);
@@ -912,7 +912,7 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 				K0s2_PhiVector->push_back(K0s_phi->at(ik0s2));
 				K0s2_MassVector->push_back(K0s_mass->at(ik0s2));
 
-				if( (K0s_chi21->at(ik0s1) == K0s_chi21->at(ik0s2)) || (K0s_chi22->at(ik0s1) == K0s_chi22->at(ik0s2)) || (K0s_chi21->at(ik0s1) == K0s_chi22->at(ik0s2)) || (K0s_chi22->at(ik0s1) == K0s_chi21->at(ik0s2)) ) { K0s1_ShareDauVector->push_back(1); K0s2_ShareDauVector->push_back(1); } else { K0s1_ShareDauVector->push_back(0); K0s1_ShareDauVector->push_back(0); }
+				if( (K0s_chi21->at(ik0s1) == K0s_chi21->at(ik0s2)) || (K0s_chi22->at(ik0s1) == K0s_chi22->at(ik0s2)) || (K0s_chi21->at(ik0s1) == K0s_chi22->at(ik0s2)) || (K0s_chi22->at(ik0s1) == K0s_chi21->at(ik0s2)) ) { K0s1_ShareDauVector->push_back(1); K0s2_ShareDauVector->push_back(1); } else { K0s1_ShareDauVector->push_back(0); K0s2_ShareDauVector->push_back(0); }
 
 				// f2 prime part
 				f2prime_PtVector->push_back(system.Pt());
@@ -927,7 +927,7 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 			heavyIonTreeOutput->Fill(); // fill event information
 			skimTreeOutput->Fill();		// filter information
 			checkFlatteningTreeOutput->Fill(); // fill EP information	
-     			F2PrimeTreeOutput->Fill(); // f2 prime information
+     		F2PrimeTreeOutput->Fill(); // f2 prime information
 		}
 		
 		// Clear the vectors before the next event! Otherwise all the K0s pile up cumulatively		
