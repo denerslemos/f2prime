@@ -880,8 +880,8 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 
 			    // Combine them and compute invariant mass
 			    LorentzVector system = neutralkaon1 + neutralkaon2;
-				if( system.M() < 1.2 ) continue;
-    			if( system.M() > 1.8 ) continue;
+				if( system.M() <= 1.2 ) continue;
+    			if( system.M() >= 1.8 ) continue;
 				
 				// K0s1 part
 				K0s1_LooseVector->push_back(1);
