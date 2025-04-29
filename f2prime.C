@@ -12,7 +12,7 @@ std::map<unsigned long long, int> runLumiEvtToEntryMap;
 unsigned long long keyFromRunLumiEvent(UInt_t run, UInt_t lumi, ULong64_t event);
 
 /*
-Main skim K0Star pPb data
+Main skim f2prime pPb data
 
 Written by Dener Lemos (dener.lemos@cern.ch)
 
@@ -20,6 +20,7 @@ Written by Dener Lemos (dener.lemos@cern.ch)
 input_file: text file with a list of root input files: Forest or Skims from jets
 input_V0file: text files with a list of V0 files compatible with jets
 ouputfile: just a counting number to run on Condor
+ntrkoff: multiplicity selection
 */
 void f2prime(TString input_file, TString input_V0file, TString ouputfile, int ntrkoff){
 
@@ -786,7 +787,7 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 
 				TVector3 dauvec1_k0s1(K0s_d1px->at(ik0s1), K0s_d1py->at(ik0s1), K0s_d1pz->at(ik0s1));
 				TVector3 dauvec2_k0s1(K0s_d2px->at(ik0s1), K0s_d2py->at(ik0s1), K0s_d2pz->at(ik0s1));
-				TVector3 dauvecsum_k0s1(dauvec1+dauvec2);
+				TVector3 dauvecsum_k0s1(dauvec1_k0s1+dauvec2_k0s1);
 
 				// Armenteros-Podolanski
  				float Pp_k0s1=sqrt(Pxp_k0s1*Pxp_k0s1+Pyp_k0s1*Pyp_k0s1+Pzp_k0s1*Pzp_k0s1);
@@ -845,7 +846,7 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 
 				TVector3 dauvec1_k0s2(K0s_d1px->at(ik0s2), K0s_d1py->at(ik0s2), K0s_d1pz->at(ik0s2));
 				TVector3 dauvec2_k0s2(K0s_d2px->at(ik0s2), K0s_d2py->at(ik0s2), K0s_d2pz->at(ik0s2));
-				TVector3 dauvecsum_k0s2(dauvec1+dauvec2);
+				TVector3 dauvecsum_k0s2(dauvec1_k0s2+dauvec2_k0s2);
 
 				// Armenteros-Podolanski
  				float Pp_k0s2=sqrt(Pxp_k0s2*Pxp_k0s2+Pyp_k0s2*Pyp_k0s2+Pzp_k0s2*Pzp_k0s2);
@@ -926,7 +927,7 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 			heavyIonTreeOutput->Fill(); // fill event information
 			skimTreeOutput->Fill();		// filter information
 			checkFlatteningTreeOutput->Fill(); // fill EP information	
-     		F2PrimeTreeOutput->Fill(); // K0Star information
+     			F2PrimeTreeOutput->Fill(); // f2 prime information
 		}
 		
 		// Clear the vectors before the next event! Otherwise all the K0s pile up cumulatively		
@@ -1033,5 +1034,5 @@ int main(int argc, char** argv){
 				TString secArgument(argv[2]);				
 				TString outfile(argv[3]);
 				int ntrkoffline = atoi(argv[4]);
-				K0Star(firstArgument, secArgument,outfile, ntrkoffline);
+				f2prime(firstArgument, secArgument,outfile, ntrkoffline);
 }

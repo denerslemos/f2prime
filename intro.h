@@ -11,7 +11,7 @@ void printwelcome(bool printout){
 	cout << endl;
 	cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"         << endl;
 	cout << "+                                                              +"         << endl;
-	cout << "+    	        Welcome to K0Star skim code for Data     	+"         << endl;
+	cout << "+    	        Welcome to f2prime skim code for Data     	+"         << endl;
 	cout << "+              From Dener Lemos: ddesouzal@bnl.gov             +"         << endl;
 	cout << "+                                                              +"         << endl;
 	cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"         << endl;

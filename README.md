@@ -17,21 +17,19 @@ git clone git@github.com:denerslemos/f2prime.git
 cd f2prime
 mkdir cond
 ```
-Before compile the code you must check the [sub_skim.sh](https://github.com/denerslemos/K0Star/blob/main/sub_skim.sh) lines 4 (CMSSW/src) and 6 (.../K0Star) and replace by your own folders.
-
 Once this steps are done you can compile the code with
 ```
 g++ -O2 f2prime.C `root-config --libs` `root-config --cflags` -o f2prime
 ```
 This will create the executable: ```f2prime``` 
 
-After that you will need your VOMS certificate, do it using
+You will need your VOMS certificate, do it using
 ```
 voms-proxy-init -rfc -voms cms --out voms_proxy.txt --hours 200
 ```
 that creates a certificate file valid for 200 hours: voms_proxy.txt
 
-After that you will submit jobs by using [HTCondor_submit.py](https://github.com/denerslemos/K0Star/blob/main/HTCondor_submit.py):
+After that, you will submit jobs by using [HTCondor_submit.py](https://github.com/denerslemos/f2prime/blob/main/HTCondor_submit.py):
 ```
 python3 HTCondor_submit.py -i input_text_file -v v0_input_file -o output_name_file -n X -s Y -c Z -p Q
 ```
@@ -44,4 +42,4 @@ python3 HTCondor_submit.py -i input_text_file -v v0_input_file -o output_name_fi
  - Q: PWD of the folder you are at (or where you wanna run your code)
 It will automatically include a counter for each input
 
-
+You can also edit the ```jobsub.py``` to select what you wanna submit. For that, you must edit the first few lines for your own repositories and uncomment/comment the jobs you wanna submit. Please DO NOT submit all jobs at the same time.

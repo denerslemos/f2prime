@@ -43,7 +43,7 @@ mkdir -p cond
 echo "Submit skim jobs at "
 echo PWD: $PWD
 
-./K0Star $1 $2 $3 $4
+./f2prime $1 $2 $3 $4
 """
 
 # Save to a shell script file
