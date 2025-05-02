@@ -980,6 +980,12 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 		K0s1_EtaVector->clear();
 		K0s1_PhiVector->clear();
 		K0s1_MassVector->clear();
+		K0s1_D1_PtVector->clear();
+		K0s1_D1_EtaVector->clear();
+		K0s1_D1_PhiVector->clear();
+		K0s1_D2_PtVector->clear();
+		K0s1_D2_EtaVector->clear();
+		K0s1_D2_PhiVector->clear();
 
 		K0s2_ShareDauVector->clear();
 		K0s2_LooseVector->clear();
@@ -994,7 +1000,13 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 		K0s2_EtaVector->clear();
 		K0s2_PhiVector->clear();
 		K0s2_MassVector->clear();
-		
+		K0s2_D1_PtVector->clear();
+		K0s2_D1_EtaVector->clear();
+		K0s2_D1_PhiVector->clear();
+		K0s2_D2_PtVector->clear();
+		K0s2_D2_EtaVector->clear();
+		K0s2_D2_PhiVector->clear();
+						
 		f2prime_PtVector->clear();
 		f2prime_EtaVector->clear();
 		f2prime_PhiVector->clear();
