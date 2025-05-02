@@ -431,6 +431,12 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 	std::vector<float> *K0s1_EtaVector = new std::vector<float>(); K0s1_EtaVector->clear();
 	std::vector<float> *K0s1_PhiVector = new std::vector<float>(); K0s1_PhiVector->clear();
 	std::vector<float> *K0s1_MassVector = new std::vector<float>(); K0s1_MassVector->clear();
+	std::vector<float> *K0s1_D1_PtVector = new std::vector<float>(); K0s1_D1_PtVector->clear();
+	std::vector<float> *K0s1_D1_EtaVector = new std::vector<float>(); K0s1_D1_EtaVector->clear();
+	std::vector<float> *K0s1_D1_PhiVector = new std::vector<float>(); K0s1_D1_PhiVector->clear();
+	std::vector<float> *K0s1_D2_PtVector = new std::vector<float>(); K0s1_D2_PtVector->clear();
+	std::vector<float> *K0s1_D2_EtaVector = new std::vector<float>(); K0s1_D2_EtaVector->clear();
+	std::vector<float> *K0s1_D2_PhiVector = new std::vector<float>(); K0s1_D2_PhiVector->clear();
 	
 	std::vector<int> *K0s2_ShareDauVector = new std::vector<int>(); K0s2_ShareDauVector->clear();	
 	std::vector<int> *K0s2_NominalVector = new std::vector<int>(); K0s2_NominalVector->clear();
@@ -445,6 +451,12 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 	std::vector<float> *K0s2_EtaVector = new std::vector<float>(); K0s2_EtaVector->clear();
 	std::vector<float> *K0s2_PhiVector = new std::vector<float>(); K0s2_PhiVector->clear();
 	std::vector<float> *K0s2_MassVector = new std::vector<float>(); K0s2_MassVector->clear();	
+	std::vector<float> *K0s2_D1_PtVector = new std::vector<float>(); K0s2_D1_PtVector->clear();
+	std::vector<float> *K0s2_D1_EtaVector = new std::vector<float>(); K0s2_D1_EtaVector->clear();
+	std::vector<float> *K0s2_D1_PhiVector = new std::vector<float>(); K0s2_D1_PhiVector->clear();
+	std::vector<float> *K0s2_D2_PtVector = new std::vector<float>(); K0s2_D2_PtVector->clear();
+	std::vector<float> *K0s2_D2_EtaVector = new std::vector<float>(); K0s2_D2_EtaVector->clear();
+	std::vector<float> *K0s2_D2_PhiVector = new std::vector<float>(); K0s2_D2_PhiVector->clear();
 
 	F2PrimeTreeOutput->Branch("f2prime_pt","vector<float>", &f2prime_PtVector);
 	F2PrimeTreeOutput->Branch("f2prime_eta","vector<float>", &f2prime_EtaVector);
@@ -464,7 +476,13 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 	F2PrimeTreeOutput->Branch("K0s1_eta","vector<float>", &K0s1_EtaVector);
 	F2PrimeTreeOutput->Branch("K0s1_phi","vector<float>", &K0s1_PhiVector);
 	F2PrimeTreeOutput->Branch("K0s1_mass","vector<float>", &K0s1_MassVector);
-
+	F2PrimeTreeOutput->Branch("K0s1_d1_pt","vector<float>", &K0s1_D1_PtVector);
+	F2PrimeTreeOutput->Branch("K0s1_d1_eta","vector<float>", &K0s1_D1_EtaVector);
+	F2PrimeTreeOutput->Branch("K0s1_d1_phi","vector<float>", &K0s1_D1_PhiVector);
+	F2PrimeTreeOutput->Branch("K0s1_d2_pt","vector<float>", &K0s1_D2_PtVector);
+	F2PrimeTreeOutput->Branch("K0s1_d2_eta","vector<float>", &K0s1_D2_EtaVector);
+	F2PrimeTreeOutput->Branch("K0s1_d2_phi","vector<float>", &K0s1_D2_PhiVector);
+	
 	F2PrimeTreeOutput->Branch("K0s2_sharedaughter","vector<int>", &K0s2_ShareDauVector);	
 	F2PrimeTreeOutput->Branch("K0s2_nominal","vector<int>", &K0s2_NominalVector);
 	F2PrimeTreeOutput->Branch("K0s2_tight","vector<int>", &K0s2_TightVector);
@@ -478,7 +496,13 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 	F2PrimeTreeOutput->Branch("K0s2_eta","vector<float>", &K0s2_EtaVector);
 	F2PrimeTreeOutput->Branch("K0s2_phi","vector<float>", &K0s2_PhiVector);
 	F2PrimeTreeOutput->Branch("K0s2_mass","vector<float>", &K0s2_MassVector);
-
+	F2PrimeTreeOutput->Branch("K0s2_d1_pt","vector<float>", &K0s2_D1_PtVector);
+	F2PrimeTreeOutput->Branch("K0s2_d1_eta","vector<float>", &K0s2_D1_EtaVector);
+	F2PrimeTreeOutput->Branch("K0s2_d1_phi","vector<float>", &K0s2_D1_PhiVector);
+	F2PrimeTreeOutput->Branch("K0s2_d2_pt","vector<float>", &K0s2_D2_PtVector);
+	F2PrimeTreeOutput->Branch("K0s2_d2_eta","vector<float>", &K0s2_D2_EtaVector);
+	F2PrimeTreeOutput->Branch("K0s2_d2_phi","vector<float>", &K0s2_D2_PhiVector);
+	
 	// Event plane
 	TTree *checkFlatteningTreeOutput = new TTree("tree","");
 	float epang_HFm2, epang_HFp2,epang_HFm3, epang_HFp3, epang_HFm4, epang_HFp4, epang_trackmid2, epang_trackmid3, epang_trackmid4, epang_trackm2, epang_trackm3, epang_trackm4, epang_trackp2, epang_trackp3, epang_trackp4;	
@@ -897,6 +921,12 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 				K0s1_EtaVector->push_back(K0s_eta->at(ik0s1));
 				K0s1_PhiVector->push_back(K0s_phi->at(ik0s1));
 				K0s1_MassVector->push_back(K0s_mass->at(ik0s1));
+				K0s1_D1_PtVector->push_back(dauvec1_k0s1.Pt());
+				K0s1_D1_EtaVector->push_back(dauvec1_k0s1.Eta());
+				K0s1_D1_PhiVector->push_back(dauvec1_k0s1.Phi());
+				K0s1_D2_PtVector->push_back(dauvec2_k0s1.Pt());
+				K0s1_D2_EtaVector->push_back(dauvec2_k0s1.Eta());
+				K0s1_D2_PhiVector->push_back(dauvec2_k0s1.Phi());
 
 				// K0s2 part
 				K0s2_LooseVector->push_back(1);
@@ -911,7 +941,13 @@ void f2prime(TString input_file, TString input_V0file, TString ouputfile, int nt
 				K0s2_EtaVector->push_back(K0s_eta->at(ik0s2));
 				K0s2_PhiVector->push_back(K0s_phi->at(ik0s2));
 				K0s2_MassVector->push_back(K0s_mass->at(ik0s2));
-
+				K0s2_D1_PtVector->push_back(dauvec1_k0s2.Pt());
+				K0s2_D1_EtaVector->push_back(dauvec1_k0s2.Eta());
+				K0s2_D1_PhiVector->push_back(dauvec1_k0s2.Phi());
+				K0s2_D2_PtVector->push_back(dauvec2_k0s2.Pt());
+				K0s2_D2_EtaVector->push_back(dauvec2_k0s2.Eta());
+				K0s2_D2_PhiVector->push_back(dauvec2_k0s2.Phi());
+								
 				if( (K0s_chi21->at(ik0s1) == K0s_chi21->at(ik0s2)) || (K0s_chi22->at(ik0s1) == K0s_chi22->at(ik0s2)) || (K0s_chi21->at(ik0s1) == K0s_chi22->at(ik0s2)) || (K0s_chi22->at(ik0s1) == K0s_chi21->at(ik0s2)) ) { K0s1_ShareDauVector->push_back(1); K0s2_ShareDauVector->push_back(1); } else { K0s1_ShareDauVector->push_back(0); K0s2_ShareDauVector->push_back(0); }
 
 				// f2 prime part
